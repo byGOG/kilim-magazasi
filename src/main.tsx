@@ -4,6 +4,7 @@ import App from './storefront';
 import './styles.css';
 import './catalog.css';
 import './modern.css';
+import './interactions.css';
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
 
