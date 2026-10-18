@@ -19,20 +19,8 @@ const products: Product[] = [
 
 const formatPrice = (price: number) => new Intl.NumberFormat(siteProfile.locale, { style: 'currency', currency: siteProfile.currency, maximumFractionDigits: 0 }).format(price);
 const kilimImage = (id: number) => {
-  const rugPhotos = [
-    'photo-1600166898405-da9535204843',
-    'photo-1727156334934-52c46d6708bc',
-    'photo-1762758889413-64d717f81b0d',
-    'photo-1759722666813-5b972f5c4625',
-    'photo-1727674296076-9994f2b4d2dc',
-    'photo-1771838455786-bfe3da93d961',
-    'photo-1600566753086-00f18fb6b3ea',
-    'photo-1600210492486-724fe5c67fb0',
-    'photo-1768765349037-5bab349b931d',
-    'photo-1745905308908-25f35bacd146',
-  ];
-  const photo = rugPhotos[(id - 1) % rugPhotos.length];
-  return `https://images.unsplash.com/${photo}?auto=format&fit=crop&w=1200&q=85`;
+  const images = ['kilim-handwoven.png', 'kilim-indigo.png', 'kilim-sage.png', 'kilim-ochre.png'];
+  return `${import.meta.env.BASE_URL}${images[(id - 1) % images.length]}`;
 };
 
 function App() {
