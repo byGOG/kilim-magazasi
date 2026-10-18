@@ -1,15 +1,19 @@
 import { useMemo, useState } from 'react';
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronDown, Heart, Menu, Minus, Plus, Ruler, Search, ShoppingBag, SlidersHorizontal, Sparkles, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Heart, Menu, Ruler, Search, ShoppingBag, SlidersHorizontal, Sparkles, X } from 'lucide-react';
 
-type Product = { id: number; name: string; collection: string; price: number; oldPrice?: number; color: string; texture: string; image: string; shape?: string; tag?: string; sizes: string[] };
+type Product = { id: number; name: string; collection: string; price: number; oldPrice?: number; color: string; tone: string; texture: string; image: string; washable?: boolean; tag?: string; sizes: string[] };
 
 const products: Product[] = [
-  { id: 1, name: 'Sarnıç', collection: 'ANADOLU KOLEKSİYONU', price: 4890, oldPrice: 6200, color: 'Kiremit / Krem', texture: 'Yün & pamuk', image: 'photo-1600166898405-da9535204843', tag: 'ÇOK SATAN', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
-  { id: 2, name: 'Gün Işığı', collection: 'DOĞAL SERİ', price: 3750, color: 'Bal / Kum', texture: 'Jüt & pamuk', image: 'photo-1575414003591-ece8d3f1a5c9', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
-  { id: 3, name: 'İznik', collection: 'ANADOLU KOLEKSİYONU', price: 5320, color: 'İndigo / Fildişi', texture: 'Yün', image: 'photo-1600210492486-724fe5c67fb0', tag: 'YENİ', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
-  { id: 4, name: 'Toprak', collection: 'MODERN DOKUMA', price: 4190, color: 'Toprak / Taş', texture: 'Pamuk', image: 'photo-1600607687939-ce8a6c25118c', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
-  { id: 5, name: 'Pera', collection: 'ŞEHİR SERİSİ', price: 6150, color: 'Adaçayı / Krem', texture: 'Yün & pamuk', image: 'photo-1600566753086-00f18fb6b3ea', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
-  { id: 6, name: 'Yayla', collection: 'DOĞAL SERİ', price: 3280, color: 'Keten / Ekru', texture: 'Jüt', image: 'photo-1600573472550-8090b5e0745e', sizes: ['80 × 150', '120 × 180', '160 × 230', '200 × 290'] },
+  { id: 1, name: 'Sarnıç', collection: 'ANADOLU KOLEKSİYONU', price: 4890, oldPrice: 6200, color: 'Kiremit / Krem', tone: 'Krem', texture: 'Yün & pamuk', image: 'photo-1600166898405-da9535204843', tag: 'ÇOK SATAN', sizes: ['120 × 180', '160 × 230', '200 × 300'] },
+  { id: 2, name: 'Lodos', collection: 'MODERN DOKUMA', price: 4290, color: 'Taş / Bej', tone: 'Bej', texture: 'Polyester', washable: true, image: 'photo-1575414003591-ece8d3f1a5c9', sizes: ['160 × 230', '200 × 300'] },
+  { id: 3, name: 'Gün Işığı', collection: 'DOĞAL SERİ', price: 3750, color: 'Bal / Kum', tone: 'Bej', texture: 'Jüt & pamuk', image: 'photo-1600573472550-8090b5e0745e', tag: 'DOĞAL DOKU', sizes: ['120 × 180', '160 × 230', '200 × 300'] },
+  { id: 4, name: 'Mina', collection: 'YIKANABİLİR', price: 2190, color: 'Krem / Gri', tone: 'Gri', texture: 'Pamuk karışım', washable: true, image: 'photo-1600607687939-ce8a6c25118c', tag: 'YIKANABİLİR', sizes: ['120 × 180', '160 × 230', '200 × 290'] },
+  { id: 5, name: 'Taşlık', collection: 'YIKANABİLİR', price: 890, color: 'Kum / Antrasit', tone: 'Gri', texture: 'Polyester', washable: true, image: 'photo-1600210492486-724fe5c67fb0', sizes: ['80 × 150', '80 × 200', '80 × 300'] },
+  { id: 6, name: 'Nar', collection: 'ANADOLU KOLEKSİYONU', price: 4590, color: 'Nar çiçeği / Ekru', tone: 'Kırmızı', texture: 'Pamuk', washable: true, image: 'photo-1600166898405-da9535204843', tag: 'RENKLİ DOKUNUŞ', sizes: ['160 × 230', '200 × 300'] },
+  { id: 7, name: 'Ilgaz', collection: 'YIKANABİLİR', price: 2490, color: 'Gri / Fildişi', tone: 'Gri', texture: 'Polyester', washable: true, image: 'photo-1600566753086-00f18fb6b3ea', sizes: ['160 × 230', '200 × 290'] },
+  { id: 8, name: 'Rüya', collection: 'MODERN DOKUMA', price: 3190, color: 'Ekru / Kum', tone: 'Krem', texture: 'Polyester', washable: true, image: 'photo-1600210492486-724fe5c67fb0', tag: 'YUMUŞAK DOKU', sizes: ['120 × 180', '160 × 230', '200 × 300'] },
+  { id: 9, name: 'Ahenk', collection: 'DOĞAL SERİ', price: 2890, color: 'Jüt / Doğal', tone: 'Kahverengi', texture: 'Jüt', image: 'photo-1575414003591-ece8d3f1a5c9', tag: 'JÜT GÖRÜNÜM', sizes: ['80 × 150', '120 × 180', '160 × 230'] },
+  { id: 10, name: 'Ada', collection: 'MODERN DOKUMA', price: 3990, color: 'Adaçayı / Krem', tone: 'Yeşil', texture: 'Pamuk & polyester', washable: true, image: 'photo-1600607687939-ce8a6c25118c', tag: 'YENİ', sizes: ['160 × 230', '200 × 300'] },
 ];
 
 const formatPrice = (price: number) => new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(price);
@@ -24,14 +28,28 @@ function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [toast, setToast] = useState('');
   const [sort, setSort] = useState('Öne çıkanlar');
+  const [search, setSearch] = useState('');
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sizeFilter, setSizeFilter] = useState('Tüm ölçüler');
+  const [toneFilter, setToneFilter] = useState('Tüm renkler');
+  const [materialFilter, setMaterialFilter] = useState('Tüm dokular');
+  const [washableOnly, setWashableOnly] = useState(false);
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [customSubmitted, setCustomSubmitted] = useState(false);
 
   const visibleProducts = useMemo(() => {
-    const filtered = filter === 'Tümü' ? products : products.filter(product => product.collection === filter);
-    return [...filtered].sort((a, b) => sort === 'Fiyat: artan' ? a.price - b.price : sort === 'Fiyat: azalan' ? b.price - a.price : 0);
-  }, [filter, sort]);
+    const query = search.trim().toLocaleLowerCase('tr-TR');
+    const filtered = products.filter(product =>
+      (filter === 'Tümü' || product.collection === filter) &&
+      (!query || `${product.name} ${product.collection} ${product.color} ${product.texture}`.toLocaleLowerCase('tr-TR').includes(query)) &&
+      (sizeFilter === 'Tüm ölçüler' || product.sizes.includes(sizeFilter)) &&
+      (toneFilter === 'Tüm renkler' || product.tone === toneFilter) &&
+      (materialFilter === 'Tüm dokular' || product.texture.toLocaleLowerCase('tr-TR').includes(materialFilter.toLocaleLowerCase('tr-TR'))) &&
+      (!washableOnly || product.washable)
+    );
+    return [...filtered].sort((a, b) => sort === 'Fiyat: artan' ? a.price - b.price : sort === 'Fiyat: azalan' ? b.price - a.price : sort === 'En yeni' ? b.id - a.id : 0);
+  }, [filter, materialFilter, search, sizeFilter, sort, toneFilter, washableOnly]);
 
   const notify = (message: string) => { setToast(message); window.setTimeout(() => setToast(''), 2600); };
   const addToCart = (product: Product) => {
@@ -65,9 +83,10 @@ function App() {
 
       <section className="collection-section" id="koleksiyon">
         <div className="section-heading"><div><p className="eyebrow"><span /> ÖZENLE SEÇİLDİ</p><h2>Yaşam alanınıza<br /><em>iyi gelecek</em> bir dokunuş.</h2></div><p className="section-intro">Her desenin bir çıkış noktası, her dokumanın kendine özgü bir dokusu var. Sizin hikâyenize uyanı bulun.</p></div>
-        <div className="collection-toolbar"><div className="filter-tabs">{['Tümü', 'ANADOLU KOLEKSİYONU', 'DOĞAL SERİ', 'MODERN DOKUMA'].map(item => <button key={item} className={filter === item ? 'filter-tab active' : 'filter-tab'} onClick={() => setFilter(item)}>{item === 'Tümü' ? 'Tüm halılar' : item}</button>)}</div><div className="toolbar-right"><button className="filter-button" onClick={() => notify('Filtre seçenekleri bir sonraki adımda bağlanacak.')}><SlidersHorizontal size={15} /> Filtrele</button><label className="sort-select"><span>Sırala:</span><select aria-label="Ürünleri sırala" value={sort} onChange={event => setSort(event.target.value)}><option>Öne çıkanlar</option><option>Fiyat: artan</option><option>Fiyat: azalan</option></select><ChevronDown size={14} /></label></div></div>
-        <div className="product-grid">{visibleProducts.slice(0, 4).map(product => <article className="product-card" key={product.id}><div className="product-image-wrap"><img src={imageUrl(product.image)} alt={`${product.name} dokuma halı`} /><div className="product-badges">{product.tag && <span>{product.tag}</span>}</div><button className={liked.includes(product.id) ? 'favorite-button favorited' : 'favorite-button'} aria-label="Favorilere ekle" onClick={() => toggleLiked(product.id)}><Heart size={17} fill={liked.includes(product.id) ? 'currentColor' : 'none'} /></button><button className="quick-add" onClick={() => addToCart(product)}>Sepete ekle <ArrowUpRight size={15} /></button></div><div className="product-info"><div><span className="product-collection">{product.collection}</span><h3>{product.name}</h3></div><div className="product-prices">{product.oldPrice && <s>{formatPrice(product.oldPrice)}</s>}<strong>{formatPrice(product.price)}<small>'den</small></strong></div></div><p className="product-color"><span />{product.color} <span className="color-separator">·</span> {product.texture}</p><div className="size-row"><span>Ölçü</span><div className="size-options">{product.sizes.slice(0, 4).map(size => <button key={size} className={selected[product.id] === size ? 'size-option chosen' : 'size-option'} onClick={() => setSelected(current => ({ ...current, [product.id]: size }))}>{size}</button>)}<button className="size-custom" onClick={() => setCustomOpen(true)}>Özel <ArrowUpRight size={11} /></button></div></div></article>)}</div>
-        <div className="catalog-bottom"><span>{visibleProducts.length} özenle seçilmiş model</span><button onClick={() => notify('Kataloğun tamamı çok yakında.')}>Tüm koleksiyonu gör <ArrowRight size={15} /></button></div>
+        <div className="collection-toolbar"><div className="filter-tabs">{['Tümü', 'ANADOLU KOLEKSİYONU', 'DOĞAL SERİ', 'MODERN DOKUMA', 'YIKANABİLİR'].map(item => <button key={item} className={filter === item ? 'filter-tab active' : 'filter-tab'} onClick={() => setFilter(item)}>{item === 'Tümü' ? 'Tüm halılar' : item}</button>)}</div><div className="toolbar-right"><label className="collection-search"><Search size={14} /><input id="collection-search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Halı ara" aria-label="Halı ara" /></label><button className={filterOpen ? 'filter-button filter-button-active' : 'filter-button'} aria-expanded={filterOpen} onClick={() => setFilterOpen(!filterOpen)}><SlidersHorizontal size={15} /> Filtrele</button><label className="sort-select"><span>Sırala:</span><select aria-label="Ürünleri sırala" value={sort} onChange={event => setSort(event.target.value)}><option>Öne çıkanlar</option><option>En yeni</option><option>Fiyat: artan</option><option>Fiyat: azalan</option></select><ChevronDown size={14} /></label></div></div>
+        {filterOpen && <div className="filter-panel"><label>Ölçü<select value={sizeFilter} onChange={event => setSizeFilter(event.target.value)}>{['Tüm ölçüler', '80 × 150', '80 × 200', '80 × 300', '120 × 180', '160 × 230', '200 × 290', '200 × 300'].map(size => <option key={size}>{size}</option>)}</select></label><label>Renk<select value={toneFilter} onChange={event => setToneFilter(event.target.value)}>{['Tüm renkler', 'Bej', 'Krem', 'Gri', 'Kırmızı', 'Kahverengi', 'Yeşil'].map(tone => <option key={tone}>{tone}</option>)}</select></label><label>Malzeme<select value={materialFilter} onChange={event => setMaterialFilter(event.target.value)}>{['Tüm dokular', 'Yün', 'Pamuk', 'Jüt', 'Polyester'].map(material => <option key={material}>{material}</option>)}</select></label><label className="washable-toggle"><input type="checkbox" checked={washableOnly} onChange={event => setWashableOnly(event.target.checked)} />Yıkanabilir</label><button className="clear-filters" onClick={() => { setSizeFilter('Tüm ölçüler'); setToneFilter('Tüm renkler'); setMaterialFilter('Tüm dokular'); setWashableOnly(false); setSearch(''); setFilter('Tümü'); }}>Filtreleri temizle</button></div>}
+        {visibleProducts.length > 0 ? <div className="product-grid">{visibleProducts.map(product => <article className="product-card" key={product.id}><div className="product-image-wrap"><img src={imageUrl(product.image)} alt={`${product.name} dokuma halı`} /><div className="product-badges">{product.tag && <span>{product.tag}</span>}</div><button className={liked.includes(product.id) ? 'favorite-button favorited' : 'favorite-button'} aria-label="Favorilere ekle" onClick={() => toggleLiked(product.id)}><Heart size={17} fill={liked.includes(product.id) ? 'currentColor' : 'none'} /></button><button className="quick-add" onClick={() => addToCart(product)}>Sepete ekle <ArrowUpRight size={15} /></button></div><div className="product-info"><div><span className="product-collection">{product.collection}</span><h3>{product.name}</h3></div><div className="product-prices">{product.oldPrice && <s>{formatPrice(product.oldPrice)}</s>}<strong>{formatPrice(product.price)}<small>'den</small></strong></div></div><p className="product-color"><span />{product.color} <span className="color-separator">·</span> {product.texture}</p><div className="product-flags">{product.washable && <span>Yıkanabilir</span>}<span>Özel ölçü üretim</span></div><div className="size-row"><span>Ölçü</span><div className="size-options">{product.sizes.map(size => <button key={size} className={selected[product.id] === size ? 'size-option chosen' : 'size-option'} onClick={() => setSelected(current => ({ ...current, [product.id]: size }))}>{size}</button>)}<button className="size-custom" onClick={() => setCustomOpen(true)}>Özel <ArrowUpRight size={11} /></button></div></div></article>)}</div> : <div className="empty-results"><strong>Bu seçimle eşleşen halı bulunamadı.</strong><span>Filtreleri değiştirip yeniden deneyin.</span></div>}
+        <div className="catalog-bottom"><span>{visibleProducts.length} model · fiyatlar seçilen ölçüye göre değişir</span><span className="catalog-note">Örnek başlangıç fiyatlarıdır; üretim ve stok teyidiyle kesinleşir.</span></div>
       </section>
 
       <section className="custom-banner" id="olcu"><div className="custom-art"><div className="art-ring ring-one"/><div className="art-ring ring-two"/><div className="art-center">d.</div><span className="art-caption">ÖLÇÜ SİZE, HİKÂYE SİZİN</span></div><div className="custom-copy"><p className="eyebrow"><span /> TAM OLDUĞU GİBİ</p><h2>Evinizin ölçüsünde.<br /><em>Sizin için dokundu.</em></h2><p>Alanınızı ölçün, gerisini bize bırakın. Seçtiğiniz halıyı dilediğiniz en ve boyda üretelim; evinizde tam olması gereken yere yerleşsin.</p><button className="button button-dark" onClick={() => setCustomOpen(true)}>Ölçünü belirle <ArrowRight size={16} /></button><div className="custom-note"><Check size={14} /> 50 × 80 cm'den 400 × 600 cm'ye kadar üretim</div></div></section>
@@ -85,3 +104,4 @@ function App() {
 }
 
 export default App;
+
