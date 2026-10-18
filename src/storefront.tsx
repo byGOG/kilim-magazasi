@@ -28,7 +28,7 @@ const kilimImage = (id: number) => {
   const [ground, accent, detail] = palettes;
   const diamonds = Array.from({ length: 5 }, (_, row) => Array.from({ length: 3 }, (_, col) => {
     const x = 180 + col * 120;
-    const y = 185 + row * 118;
+    const y = 165 + row * 112;
     return `<path d="M${x} ${y - 42}l38 42-38 42-38-42z" fill="none" stroke="${(row + col + id) % 2 ? accent : detail}" stroke-width="8"/><path d="M${x} ${y - 19}l17 19-17 19-17-19z" fill="${(row + col) % 2 ? detail : accent}"/>`;
   }).join('')).join('');
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 750"><defs><filter id="s" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="13" stdDeviation="12" flood-color="#44392c" flood-opacity=".18"/></filter><pattern id="w" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 1h8M0 5h8" stroke="#fff" stroke-opacity=".16" stroke-width="1"/></pattern></defs><rect width="600" height="750" fill="#eeeae1"/><rect x="97" y="36" width="406" height="678" rx="3" fill="${ground}" filter="url(#s)"/><rect x="112" y="51" width="376" height="648" fill="none" stroke="${accent}" stroke-width="12"/><rect x="128" y="67" width="344" height="616" fill="none" stroke="${detail}" stroke-width="3"/><rect x="137" y="76" width="326" height="598" fill="none" stroke="${accent}" stroke-width="2"/>${diamonds}<rect x="97" y="36" width="406" height="678" fill="url(#w)"/><path d="M112 51h376v648H112z" fill="none" stroke="${detail}" stroke-opacity=".2" stroke-width="2"/></svg>`;
