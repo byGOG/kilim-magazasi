@@ -138,3 +138,52 @@ footer{background:#2b3029;color:#f1eee7;border-top:0}
  .discover-modal{padding:24px 18px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* Structural layout pass: the homepage now reads like a textile exhibition, not a home-decor storefront. */
+.hero{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:36px;min-height:0;height:auto;max-height:none;padding:54px 7% 58px;background:#e5e0d5}
+.hero:before{top:27px;right:7%}
+.hero-copy{order:0;position:relative;left:auto;top:auto;transform:none;width:100%;max-width:none;padding:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);grid-template-rows:auto auto auto auto;column-gap:8%;align-items:end}
+.hero-copy .eyebrow{grid-column:1/-1;grid-row:1;margin-bottom:17px}
+.hero-copy h1{grid-column:1;grid-row:2/5;max-width:850px;margin:0;font-size:clamp(62px,8.3vw,118px);line-height:.88}
+.hero-copy .hero-desc{grid-column:2;grid-row:2;margin:0 0 16px;max-width:410px}
+.hero-copy>.button{grid-column:2;grid-row:3;justify-self:start;margin-bottom:12px}
+.hero-copy>.discover-trigger{grid-column:2;grid-row:4;justify-self:start}
+.hero-copy .hero-meta{grid-column:2;grid-row:5;margin-top:20px}
+.hero-kilim-art{order:1;align-self:stretch;width:100%;max-width:none;height:auto;min-height:0;margin:0;display:flex;align-items:center;justify-content:center;position:relative;background:#d8d1c4;filter:none;overflow:hidden}
+.hero-kilim-art img{display:block;width:auto;max-width:100%;height:min(58vw,650px);object-fit:contain;border:0;border-radius:0;filter:saturate(.79);mix-blend-mode:multiply}
+.hero-kilim-art>span{right:22px;bottom:22px}
+.hero-kilim-art>b{left:22px;bottom:22px}
+.hero .scroll-cue{top:28px;right:7%;bottom:auto}
+.trust-strip{min-height:94px}
+.collection-section{padding-top:78px}
+.section-heading{display:grid;grid-template-columns:1fr minmax(230px,.42fr);align-items:end;gap:30px}
+.section-heading h2{font-size:clamp(48px,6vw,82px)}
+.product-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:44px 20px}
+.product-image-wrap{aspect-ratio:.78}
+.product-info h3{font-size:21px}
+.custom-banner{margin-top:30px}
+@media(max-width:1050px){
+ .hero{padding-left:6%;padding-right:6%;gap:28px}
+ .hero-copy{column-gap:5%}
+ .hero-copy h1{font-size:clamp(58px,8vw,88px)}
+ .hero-kilim-art img{height:min(66vw,570px)}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .hero{gap:23px;padding:48px 5% 48px}
+ .hero:before{top:18px;right:5%}
+ .hero .scroll-cue{top:auto;bottom:15px;right:5%}
+ .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:0;padding-top:8px}
+ .hero-copy .eyebrow{margin-bottom:15px}
+ .hero-copy h1{font-size:clamp(54px,13vw,78px);margin:0 0 17px}
+ .hero-copy .hero-desc{margin:0 0 17px;max-width:360px}
+ .hero-copy>.button{margin:0 0 10px}
+ .hero-copy .hero-meta{margin-top:14px}
+ .hero-kilim-art{min-height:0}
+ .hero-kilim-art img{height:min(105vw,480px);max-width:100%;width:auto;object-fit:contain}
+ .hero-kilim-art>span{right:10px;bottom:10px}
+ .hero-kilim-art>b{left:10px;bottom:10px}
+ .section-heading{display:flex;align-items:flex-start}
+ .section-heading h2{font-size:clamp(42px,10vw,58px)}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
