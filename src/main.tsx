@@ -5,6 +5,7 @@ import './styles.css';
 import './catalog.css';
 import './modern.css';
 import './interactions.css';
+import './gallery-redesign.css';
 
 createRoot(document.getElementById('root')!).render(<React.StrictMode><App /></React.StrictMode>);
 
